@@ -53,6 +53,9 @@ ALTER TABLE properties
 ADD CONSTRAINT  fk_properties_types FOREIGN KEY (type_id) REFERENCES  types(type_id);
 
 --CAPITALIZE  SYMBOL COLUMN FROM ELEMENTS
-SELECT INITCAP(symbol)
-FROM elements; 
+UPDATE elements
+SET symbol = INITCAP(symbol);
+
+--REMOVE ZEROS FROM ATOMIC_MASS COLUMN
+
 
