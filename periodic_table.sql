@@ -40,7 +40,19 @@ INSERT INTO types (type) VALUES ('metal');
 INSERT INTO types (type) VALUES ('nonmetal');
 INSERT INTO types (type) VALUES ('metalloid');
 
--- ADD type_id FOREIGN KEY TO PROPERTIES TABLE
+-- ADD type_id COLUMN AND SET FOREIGN KEY TO PROPERTIES TABLE
+ALTER TABLE properties
+ADD COLUMN type_id INT;
 
+UPDATE properties SET type_id = 1 WHERE type_id IS NULL;
 
+ALTER TABLE properties
+ALTER COLUMN type_id SET NOT NULL; 
+
+ALTER TABLE properties
+ADD CONSTRAINT  fk_properties_types FOREIGN KEY (type_id) REFERENCES  types(type_id);
+
+--CAPITALIZE  SYMBOL COLUMN FROM ELEMENTS
+SELECT INITCAP(symbol)
+FROM elements; 
 
