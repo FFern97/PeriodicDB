@@ -57,5 +57,6 @@ UPDATE elements
 SET symbol = INITCAP(symbol);
 
 --REMOVE ZEROS FROM ATOMIC_MASS COLUMN
-
-
+SELECT ROUND(atomic_mass) AS rounded_atomic_mass
+FROM properties
+WHERE rounded_atomic_mass LIKE (%0); *// ???????
