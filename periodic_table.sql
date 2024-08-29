@@ -32,7 +32,15 @@ ADD CONSTRAINT unique_name UNIQUE (name);
 ALTER TABLE properties
 ADD CONSTRAINT fk_properties_elements FOREIGN KEY (atomic_number) REFERENCES elements (atomic_number);
 
+-- CREATE TYPES TABLE
+CREATE TABLE types(type_id SERIAL PRIMARY KEY, type VARCHAR(255) NOT NULL);
 
+-- INSERT ROWS INTO TYPES
+INSERT INTO types (type) VALUES ('metal');
+INSERT INTO types (type) VALUES ('nonmetal');
+INSERT INTO types (type) VALUES ('metalloid');
+
+-- ADD type_id FOREIGN KEY TO PROPERTIES TABLE
 
 
 
