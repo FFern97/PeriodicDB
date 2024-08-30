@@ -57,6 +57,28 @@ UPDATE elements
 SET symbol = INITCAP(symbol);
 
 --REMOVE ZEROS FROM ATOMIC_MASS COLUMN
-SELECT ROUND(atomic_mass) AS rounded_atomic_mass
-FROM properties
-WHERE rounded_atomic_mass LIKE (%0); *// ???????
+ALTER TABLE properties
+ALTER COLUMN atomic_mass SET DATA TYPE FLOAT;
+
+UPDATE properties
+SET atomic_mass = 1.008 WHERE atomic_number = 1;
+
+UPDATE properties
+SET atomic_mass = 4.0026 WHERE atomic_number = 2;
+
+UPDATE properties
+SET atomic_mass = 9.0122 WHERE atomic_number = 4;
+
+UPDATE properties
+SET atomic_mass = 12.011 WHERE atomic_number = 6;
+
+UPDATE properties
+SET atomic_mass = 14.007 WHERE atomic_number = 7;
+
+--ADD ELEMENT N°9 DATA TO ELEMENTS AND PROPERTIES
+INSERT INTO elements (atomic_number,symbol, name) VALUES (9, 'F', 'Fluorine');
+
+INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES (9, 'nonmetal', 18.998, -220, -188.1, 1);
+
+--CORRECT ERROR FROM FCC // CHANGE 
+
