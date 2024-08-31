@@ -81,17 +81,6 @@ SET atomic_mass = 14.007 WHERE atomic_number = 7;
 DELETE FROM properties WHERE atomic_number = 1000;
 DELETE FROM elements WHERE atomic_number = 1000;
 
---UPDATE TYPE_ID FROM PROPERTIES
-UPDATE properties
-SET type_id = 1 WHERE type= 'metal' ; 
-
-UPDATE properties
-SET type_id = 2 WHERE type= 'nonmetal' ; 
-
-UPDATE properties
-SET type_id = 3 WHERE type= 'metalloid' ; 
-
-
 --ADD ELEMENT N°9 DATA TO ELEMENTS AND PROPERTIES
 INSERT INTO elements (atomic_number,symbol, name) VALUES (9, 'F', 'Fluorine');
 
@@ -102,7 +91,23 @@ INSERT INTO elements (atomic_number,symbol, name) VALUES (10, 'Ne', 'Neon');
 
 INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES (10, 'nonmetal', 20.18, -248.6, -246.1, 1);
 
+--UPDATE TYPE_ID FROM PROPERTIES
+UPDATE properties
+SET type_id = 1 WHERE type= 'metal' ; 
 
+UPDATE properties
+SET type_id = 2 WHERE type= 'nonmetal' ; 
+
+UPDATE properties
+SET type_id = 3 WHERE type= 'metalloid' ; 
+
+--***********************************************************************
+
+--IF INSERTING ELEMENTS 9 AND 10 DONT GET ACCEPTED CHANGE ATOMIC_MASS FROM DOUBLE PRECISION TO DECIMAL WITH THIS QUERY
+  -- ALTER TABLE properties
+  -- ALTER COLUMN atomic_mass SET DATA TYPE DECIMAL; 
+
+--***********************************************************************
 
 
 --DROP TYPE COLUMN FROM PROPERTIES
