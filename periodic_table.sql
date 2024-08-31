@@ -86,3 +86,11 @@ INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius,
 INSERT INTO elements (atomic_number,symbol, name) VALUES (10, 'Ne', 'Neon');
 
 INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES (10, 'nonmetal', 20.18, -248.6, -246.1, 1);
+
+--DELETE ATOMIC NUMBER 1000 FROM ELEMENTS AND PROPERTIES
+DELETE FROM properties WHERE atomic_number = 1000;
+DELETE FROM elements WHERE atomic_number = 1000;
+
+--DROP TYPE COLUMN FROM PROPERTIES
+ALTER TABLE properties
+DROP COLUMN type;
