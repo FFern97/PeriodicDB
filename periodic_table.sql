@@ -94,3 +94,5 @@ DELETE FROM elements WHERE atomic_number = 1000;
 --DROP TYPE COLUMN FROM PROPERTIES
 ALTER TABLE properties
 DROP COLUMN type;
+
+
