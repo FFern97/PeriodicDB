@@ -16,7 +16,12 @@ SEARCH=$($PSQL "SELECT atomic_number, symbol, name  FROM elements WHERE atomic_n
 ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number='$1'")
 ELEMENT_NAME=$($PSQL "SELECT name FROM elements WHERE atomic_number='$1'")
 ELEMENT_SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number='$1'")
-MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE ")
+MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$1'")
+BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$1'")
+TYPE_ID=$($PSQL "SELECT type_id FROM properties WHERE atomic_number='$1'")
+ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$1'")
+
+
 
 if [[ -z "$SEARCH" ]]
 
@@ -29,10 +34,6 @@ if [[ -z "$SEARCH" ]]
           
 fi
 }
-
-
-
-SEARCH_ELEMENT $1
 
 
 
