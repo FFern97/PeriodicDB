@@ -82,3 +82,7 @@ INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius,
 
 --CORRECT ERROR FROM FCC // CHANGE 
 
+--ADD ELEMENT N° 10 DATA TO ELEMENTS AND PROPERTIES
+INSERT INTO elements (atomic_number,symbol, name) VALUES (10, 'Ne', 'Neon');
+
+INSERT INTO properties (atomic_number, type, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) VALUES (10, 'nonmetal', 20.18, -248.6, -246.1, 1);
