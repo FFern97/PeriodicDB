@@ -19,8 +19,7 @@ ELEMENT_SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number='$1'")
 MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$1'")
 BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$1'")
 ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$1'")
-# Tal vez tenga que cambiar la tabla del from por types
-TYPE_ID=$($PSQL "SELECT type_id FROM properties WHERE atomic_number='$1'")
+TYPE_ID=$($PSQL "SELECT type FROM types WHERE type_id=(SELECT type_id FROM properties WHERE atomic_number='$1')")
 
 
 
@@ -39,5 +38,4 @@ fi
 
 
 SEARCH_ELEMENT $1
-
 
