@@ -101,15 +101,6 @@ SET type_id = 2 WHERE type= 'nonmetal' ;
 UPDATE properties
 SET type_id = 3 WHERE type= 'metalloid' ; 
 
---***********************************************************************
-
---IF INSERTING ELEMENTS 9 AND 10 DONT GET ACCEPTED CHANGE ATOMIC_MASS FROM DOUBLE PRECISION TO DECIMAL WITH THIS QUERY
-  -- ALTER TABLE properties
-  -- ALTER COLUMN atomic_mass SET DATA TYPE DECIMAL; 
-
---***********************************************************************
-
-
 --DROP TYPE COLUMN FROM PROPERTIES
 ALTER TABLE properties
 DROP COLUMN type;
