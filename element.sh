@@ -10,32 +10,29 @@ fi
 
 
 SEARCH_ELEMENT() {
- 
-SEARCH=$($PSQL "SELECT atomic_number, symbol, name  FROM elements WHERE atomic_number::TEXT = '$1' OR symbol = '$1' OR name = '$1' ")
+    # Buscar el elemento en la base de datos
+    SEARCH=$($PSQL "SELECT atomic_number, symbol, name FROM elements WHERE atomic_number::TEXT = '$1' OR symbol = '$1' OR name = '$1'" 2>/dev/null)
 
-ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'" )
-ELEMENT_NAME=$($PSQL "SELECT name FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'")
-ELEMENT_SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1' ")
-MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER'")
-BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER' ")
-ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$ATOMIC_NUMBER'")
-TYPE_ID=$($PSQL "SELECT type FROM types WHERE type_id=(SELECT type_id FROM properties WHERE atomic_number='$ATOMIC_NUMBER')")
+    # Verificar si la búsqueda fue exitosa
+    if [[ -z "$SEARCH" ]]; then
+        echo -e "\nI could not find that element in the database."
+        exit 0
+    fi
 
+    # Obtener los detalles del elemento
+    ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'" 2>/dev/null)
+    ELEMENT_NAME=$($PSQL "SELECT name FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'" 2>/dev/null)
+    ELEMENT_SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'" 2>/dev/null)
+    MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER'" 2>/dev/null)
+    BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER'" 2>/dev/null)
+    ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$ATOMIC_NUMBER'" 2>/dev/null)
+    TYPE_ID=$($PSQL "SELECT type FROM types WHERE type_id=(SELECT type_id FROM properties WHERE atomic_number='$ATOMIC_NUMBER')" 2>/dev/null)
 
-
-if [[ -z "$SEARCH" ]]
-
-  then 
-    echo -e "\n I could not find that element in the database."
-    exit 1
-
-  else
-    echo -e "The element with atomic number $ATOMIC_NUMBER is $ELEMENT_NAME ($ELEMENT_SYMBOL). It's a $TYPE_ID, with a mass of $ATOMIC_MASS amu. $ELEMENT_NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius." 
-          
-fi
+    # Mostrar los detalles del elemento
+    echo -e "The element with atomic number $ATOMIC_NUMBER is $ELEMENT_NAME ($ELEMENT_SYMBOL). It's a $TYPE_ID, with a mass of $ATOMIC_MASS amu. $ELEMENT_NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
 }
 
 
 
-SEARCH_ELEMENT $1
 
+SEARCH_ELEMENT $1
