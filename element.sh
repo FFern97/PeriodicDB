@@ -13,13 +13,13 @@ SEARCH_ELEMENT() {
  
 SEARCH=$($PSQL "SELECT atomic_number, symbol, name  FROM elements WHERE atomic_number::TEXT = '$1' OR symbol = '$1' OR name = '$1' ")
 
-ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'")
+ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'" )
 ELEMENT_NAME=$($PSQL "SELECT name FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1'")
 ELEMENT_SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number::TEXT='$1' OR symbol = '$1' OR name = '$1' ")
-MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number::TEXT='$1' ")
-BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number::TEXT='$1' ")
-ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number::TEXT='$1'")
-TYPE_ID=$($PSQL "SELECT type FROM types WHERE type_id=(SELECT type_id FROM properties WHERE atomic_number::TEXT='$1')")
+MELTING_POINT=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER'")
+BOILING_POINT=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number='$ATOMIC_NUMBER' ")
+ATOMIC_MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number='$ATOMIC_NUMBER'")
+TYPE_ID=$($PSQL "SELECT type FROM types WHERE type_id=(SELECT type_id FROM properties WHERE atomic_number='$ATOMIC_NUMBER')")
 
 
 
