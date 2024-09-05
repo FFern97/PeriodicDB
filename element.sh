@@ -15,7 +15,7 @@ SEARCH_ELEMENT() {
 
     # Verificar si la búsqueda fue exitosa
     if [[ -z "$SEARCH" ]]; then
-        echo -e "\nI could not find that element in the database."
+        echo "I could not find that element in the database."
         exit 0
     fi
 
