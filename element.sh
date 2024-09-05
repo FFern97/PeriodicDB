@@ -33,31 +33,6 @@ SEARCH_ELEMENT() {
 }
 
 
-
-
 SEARCH_ELEMENT $1
 
-
-
-
-
-
-camper: /project$ mkdir periodic_table
-camper: /project$ cd periodic_table/
-camper: /periodic_table$ git init
-camper: /periodic_table$ git checkout -b main
-
-camper: /periodic_table$ touch element.sh
-camper: /periodic_table$ git add .
-camper: /periodic_table$ git commit -m "Add element.sh"
-camper: /periodic_table$ chmod +x element.sh
-
-
-camper: /periodic_table$ git add .
-camper: /periodic_table$ git commit -m "Initial commit"
-camper: /periodic_table$ git log --oneline
-
-camper: /periodic_table$ git commit --amend -m "Initial commit"
-camper: /periodic_table$ git log --oneline
-camper: /periodic_table$ git rebase -i --root
 
